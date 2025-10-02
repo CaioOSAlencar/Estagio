@@ -10,21 +10,34 @@
 
 | Ferramenta | Total | ✅ Passou | ❌ Falhou | Taxa Sucesso |
 |------------|-------|----------|----------|--------------|
-| **Robot Framework** | 7 testes | 7 | 0 | **100%** |
-| **Newman/Postman** | 10 requests | 5 | 5 | 50% |
+| **Robot Framework** | 11 testes | 11 | 0 | **100%** |
+| **Newman/Postman** | 37 requests | ~15 | ~22 | ~40% |
+| **Tentativa 37 casos** | 37 testes | 11 | 26 | 30% |
 
 ---
 
 ## ✅ **TESTES QUE FUNCIONAM**
 
-### Robot Framework - 100% Sucesso
-1. **Disponibilidade da API** - GET /usuarios retorna 200
-2. **Cadastro de usuário válido** - POST /usuarios com dados únicos
-3. **Login completo** - Cadastro → Login → Uso do token
-4. **Validação email duplicado** - Rejeita emails já cadastrados  
-5. **Campos obrigatórios** - Valida nome, email, password
-6. **Credenciais inexistentes** - Retorna 401 corretamente
-7. **Busca com filtros** - Query parameters funcionando
+### Robot Framework - 100% Sucesso (11 testes)
+
+#### 🔐 **Login (3 testes)**
+1. **Email inválido** - Formato sem @ rejeitado corretamente
+2. **Campos vazios** - Validação de campos obrigatórios  
+3. **Provedor específico** - Gmail aceito (API permissiva)
+
+#### 👤 **Usuários (5 testes)**
+4. **Listar usuários** - GET /usuarios funcionando
+5. **Cadastro sem nome** - Validação correta (400)
+6. **Cadastro sem email** - Validação correta (400)  
+7. **Cadastro sem password** - Validação correta (400)
+8. **Deletar inexistente** - "Nenhum registro excluído"
+
+#### 🛒 **Produtos (2 testes)**
+9. **Listar produtos** - GET /produtos funcionando
+10. **Busca com filtros** - Query parameters funcionando
+
+#### 🛍️ **Carrinho (1 teste)**
+11. **Listar carrinhos** - GET /carrinhos funcionando
 
 ### Newman/Postman - Parcial
 1. **Login credenciais inválidas** - 401 OK ✅
