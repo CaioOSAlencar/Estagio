@@ -6,7 +6,7 @@
 |-------|--------|
 | **Data/Hora Início** | ___/___/2025 às __:__ |
 | **Data/Hora Fim** | ___/___/2025 às __:__ |
-| **Executado por** | [Seu Nome] |
+| **Executado por**: Caio Oliveira Silva Alencar |
 | **Tipo de Execução** | ⬜ Smoke ⬜ Regressão ⬜ Boundary ⬜ Exploratório |
 | **Ambiente** | ⬜ https://serverest.dev ⬜ Local ⬜ AWS |
 | **Ferramenta** | ⬜ Postman ⬜ Newman ⬜ Robot Framework |
@@ -220,7 +220,7 @@
 
 | Papel | Nome | Data | Assinatura |
 |-------|------|------|------------|
-| **Executor** | [Seu Nome] | ___/___/2025 | |
+| **Executor** | Caio Oliveira Silva Alencar | ___/___/2025 | |
 | **Revisor** | [Nome do Revisor] | ___/___/2025 | |
 | **Aprovador** | [Nome do Aprovador] | ___/___/2025 | |
 

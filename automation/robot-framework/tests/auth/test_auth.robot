@@ -23,7 +23,7 @@ CT-001: Login com Credenciais Válidas
     # Act - Executar login
     ${response}=    POST On Session    serverest    /login
     ...    json={"email": "${email}", "password": "${password}"}
-    ...    expected_status=200
+    ...    expected_status=any
     
     # Assert - Validar resultados
     Validar Response Status    ${response}    200
@@ -45,7 +45,7 @@ CT-002: Login com Credenciais Inválidas - Email Inválido
     # Act - Tentar login com email inválido
     ${response}=    POST On Session    serverest    /login
     ...    json={"email": "email_inexistente@teste.com", "password": "123456"}
-    ...    expected_status=401
+    ...    expected_status=any
     
     # Assert - Validar erro
     Validar Response Status    ${response}    401
@@ -64,7 +64,7 @@ CT-003: Login com Credenciais Inválidas - Senha Inválida
     # Act - Tentar login com senha incorreta
     ${response}=    POST On Session    serverest    /login
     ...    json={"email": "${email}", "password": "senha_errada"}
-    ...    expected_status=401
+    ...    expected_status=any
     
     # Assert - Validar erro
     Validar Response Status    ${response}    401
@@ -103,7 +103,7 @@ CT-006: Validação de Expiração de Token
     # Act - Usar token imediatamente (deve funcionar)
     ${headers}=    Create Dictionary    Authorization=${token}
     ${response_valid}=    GET On Session    serverest    /usuarios
-    ...    headers=${headers}    expected_status=200
+    ...    headers=${headers}    expected_status=any
     
     # Assert - Token válido funciona
     Should Be Equal As Numbers    ${response_valid.status_code}    200
@@ -113,7 +113,7 @@ CT-006: Validação de Expiração de Token
     ${headers_invalid}=    Create Dictionary    Authorization=${invalid_token}
     
     ${response_invalid}=    GET On Session    serverest    /usuarios
-    ...    headers=${headers_invalid}    expected_status=401
+    ...    headers=${headers_invalid}    expected_status=any
     
     # Assert - Token inválido é rejeitado
     Should Be Equal As Numbers    ${response_invalid.status_code}    401
@@ -134,7 +134,7 @@ Testar Login Com Campos Vazios
     END
     
     ${response}=    POST On Session    serverest    /login
-    ...    json=${payload}    expected_status=400
+    ...    json=${payload}    expected_status=any
     
     # Assert - Validar erro específico do campo
     Validar Response Status    ${response}    400

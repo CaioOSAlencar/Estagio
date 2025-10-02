@@ -1,0 +1,1878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-10-01T20:18:39.556966" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Auth" source="E:\programação\estagio\Estagio\automation\robot-framework\tests\auth\test_auth.robot">
+<kw name="Setup Test Suite" owner="common_keywords" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:40.359518" level="INFO">Creating Session using : alias=serverest, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=10, proxies=None, verify=False,                     debug=0 </msg>
+<arg>serverest</arg>
+<arg>${BASE_URL}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-01T20:18:40.358432" elapsed="0.001928"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.361636" level="INFO">Session created for https://serverest.dev</msg>
+<arg>Session created for ${BASE_URL}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.360977" elapsed="0.001170"/>
+</kw>
+<doc>Configuração inicial para a suite de testes</doc>
+<status status="PASS" start="2025-10-01T20:18:40.356036" elapsed="0.007624"/>
+</kw>
+<test id="s1-t1" name="CT-001: Login com Credenciais Válidas" line="12">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:40.371178" level="INFO">${timestamp} = 20251001_201840</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.369864" elapsed="0.001458"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.375807" level="INFO">${TEST_TIMESTAMP} = 20251001_201840</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.371869" elapsed="0.004205"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.377232" level="INFO">Test started at 20251001_201840</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.376578" elapsed="0.001000"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:40.368565" elapsed="0.009937"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.382624" level="INFO">${email} = admin.automation@teste.com</msg>
+<var>${email}</var>
+<arg>${ADMIN_USER_DATA['email']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.380247" elapsed="0.002523"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.386619" level="INFO">${password} = senha123</msg>
+<var>${password}</var>
+<arg>${ADMIN_USER_DATA['password']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.384025" elapsed="0.002742"/>
+</kw>
+<kw name="Cadastrar Usuario Admin" owner="common_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:40.393810" level="INFO">${payload} = {'nome': 'Admin Teste', 'email': 'admin.automation@teste.com', 'password': 'senha123', 'administrador': 'true'}</msg>
+<var>${payload}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=true</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.391048" elapsed="0.002991"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:41.224587" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '111', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Admin Teste", "email": "admin.automation@teste.com", "password": "senha123", "administrador": "true"}' 
+ </msg>
+<msg time="2025-10-01T20:18:41.224845" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'd62f42768f5a9a94c3d936126d756bf7;o=1', 'date': 'Thu, 02 Oct 2025 00:18:40 GMT', 'server': 'Google Frontend', 'Content-Length': '53'} 
+ body={
+    "message": "Este email já está sendo usado"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:41.225014" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:41.226031" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:40.395256" elapsed="0.830866"/>
+</kw>
+<if>
+<branch type="IF" condition="${response.status_code} == 201">
+<kw name="Get From Dictionary" owner="Collections">
+<var>${user_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.227836" elapsed="0.000067"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Admin user created with ID: ${user_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.228248" elapsed="0.000053"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="NOT RUN" start="2025-10-01T20:18:41.228421" elapsed="0.000055"/>
+</return>
+<status status="NOT RUN" start="2025-10-01T20:18:41.226412" elapsed="0.002172"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 400">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.230402" level="INFO">User already exists or validation error</msg>
+<arg>User already exists or validation error</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.230132" elapsed="0.000389"/>
+</kw>
+<return>
+<value>${EMPTY}</value>
+<status status="PASS" start="2025-10-01T20:18:41.230643" elapsed="0.000092"/>
+</return>
+<status status="PASS" start="2025-10-01T20:18:41.228709" elapsed="0.002130"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Failed to create admin user: ${response.status_code}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.231126" elapsed="0.000048"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:41.230908" elapsed="0.000358"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:41.226320" elapsed="0.005003"/>
+</if>
+<arg>${email}</arg>
+<arg>${password}</arg>
+<doc>Cadastra um novo usuário administrador</doc>
+<status status="PASS" start="2025-10-01T20:18:40.388815" elapsed="0.843500"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:41.540202" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '73', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"admin.automation@teste.com\\", \\"password\\": \\"senha123\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:41.542939" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '6564e070ef38fa9cc3d936126d756ebb', 'date': 'Thu, 02 Oct 2025 00:18:41 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:41.543339" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:41.546973" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "${email}", "password": "${password}"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.232951" elapsed="0.314378"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.554010" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-10-01T20:18:41.554959" level="FAIL">400.0 != 200.0</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="FAIL" start="2025-10-01T20:18:41.551137" elapsed="0.006353">400.0 != 200.0</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.558237" elapsed="0.000129"/>
+</kw>
+<arg>${response}</arg>
+<arg>200</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="FAIL" start="2025-10-01T20:18:41.549353" elapsed="0.009566">400.0 != 200.0</status>
+</kw>
+<kw name="Validar Response Contem Campo" owner="common_keywords">
+<arg>${response}</arg>
+<arg>message</arg>
+<doc>Valida que a resposta contém um campo específico</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.561054" elapsed="0.000246"/>
+</kw>
+<kw name="Validar Response Contem Campo" owner="common_keywords">
+<arg>${response}</arg>
+<arg>authorization</arg>
+<doc>Valida que a resposta contém um campo específico</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.566485" elapsed="0.000173"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.568050" elapsed="0.000191"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${message}</arg>
+<arg>Login realizado com sucesso</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.570602" elapsed="0.000137"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>authorization</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.571856" elapsed="0.000140"/>
+</kw>
+<kw name="Validar Token Format" owner="common_keywords">
+<arg>${token}</arg>
+<doc>Valida o formato do token JWT</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.573502" elapsed="0.000158"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ CT-001 PASSED: Login successful with valid credentials</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.574837" elapsed="0.000178"/>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Log Response Details" owner="common_keywords">
+<kw name="Get Variable Value" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.600311" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>${response}</arg>
+<arg>${None}</arg>
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.586854" elapsed="0.013777"/>
+</kw>
+<if>
+<branch type="IF" condition="${response} != ${None}">
+<kw name="Log" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.603599" elapsed="0.000200"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.604637" elapsed="0.000173"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Body: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.605549" elapsed="0.000161"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:41.601756" elapsed="0.004223"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:41.601502" elapsed="0.004708"/>
+</if>
+<doc>Log detalhado da resposta para debug</doc>
+<status status="PASS" start="2025-10-01T20:18:41.583572" elapsed="0.023108"/>
+</kw>
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.581280" elapsed="0.025776"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.608511" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.607798" elapsed="0.001056"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:41.578124" elapsed="0.031175"/>
+</kw>
+<doc>Valida login com credenciais válidas retorna token JWT</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>critical</tag>
+<tag>login</tag>
+<tag>positive</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2025-10-01T20:18:40.364506" elapsed="1.248502">400.0 != 200.0</status>
+</test>
+<test id="s1-t2" name="CT-002: Login com Credenciais Inválidas - Email Inválido" line="41">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:41.635323" level="INFO">${timestamp} = 20251001_201841</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.633529" elapsed="0.002041"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.645198" level="INFO">${TEST_TIMESTAMP} = 20251001_201841</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.636477" elapsed="0.009061"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.649024" level="INFO">Test started at 20251001_201841</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.647851" elapsed="0.001596"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:41.631197" elapsed="0.018753"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:41.884854" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '72', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"email_inexistente@teste.com\\", \\"password\\": \\"123456\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:41.886397" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'fa9a50fde0433c77c3d936126d756af7', 'date': 'Thu, 02 Oct 2025 00:18:41 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:41.886555" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:41.887223" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "email_inexistente@teste.com", "password": "123456"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.652339" elapsed="0.234957"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.888930" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-10-01T20:18:41.889088" level="FAIL">400.0 != 401.0</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="FAIL" start="2025-10-01T20:18:41.888188" elapsed="0.001023">400.0 != 401.0</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.889380" elapsed="0.000033"/>
+</kw>
+<arg>${response}</arg>
+<arg>401</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="FAIL" start="2025-10-01T20:18:41.887730" elapsed="0.001827">400.0 != 401.0</status>
+</kw>
+<kw name="Validar Response Message" owner="common_keywords">
+<arg>${response}</arg>
+<arg>${ERROR_MESSAGES['login']['invalid_credentials']}</arg>
+<doc>Valida a mensagem na resposta</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.889902" elapsed="0.000044"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ CT-002 PASSED: Invalid email correctly rejected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.890179" elapsed="0.000031"/>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Log Response Details" owner="common_keywords">
+<kw name="Get Variable Value" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.893520" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>${response}</arg>
+<arg>${None}</arg>
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.891586" elapsed="0.001978"/>
+</kw>
+<if>
+<branch type="IF" condition="${response} != ${None}">
+<kw name="Log" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.894042" elapsed="0.000063"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.894409" elapsed="0.000150"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Body: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:41.895083" elapsed="0.000114"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:41.893688" elapsed="0.001592"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:41.893656" elapsed="0.001708"/>
+</if>
+<doc>Log detalhado da resposta para debug</doc>
+<status status="PASS" start="2025-10-01T20:18:41.891254" elapsed="0.004265"/>
+</kw>
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.890964" elapsed="0.004675"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.896215" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.895930" elapsed="0.000400"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:41.890612" elapsed="0.005841"/>
+</kw>
+<doc>Valida que email inválido retorna erro 401</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>boundary</tag>
+<tag>login</tag>
+<tag>negative</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2025-10-01T20:18:41.625178" elapsed="0.271560">400.0 != 401.0</status>
+</test>
+<test id="s1-t3" name="CT-003: Login com Credenciais Inválidas - Senha Inválida" line="56">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:41.899744" level="INFO">${timestamp} = 20251001_201841</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.899415" elapsed="0.000381"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.901237" level="INFO">${TEST_TIMESTAMP} = 20251001_201841</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.899992" elapsed="0.001325"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.901694" level="INFO">Test started at 20251001_201841</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.901487" elapsed="0.000281"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:41.899023" elapsed="0.002840"/>
+</kw>
+<kw name="Generate Unique Email" owner="common_keywords">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:41.903077" level="INFO">${timestamp} = 20251001_201841</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.902780" elapsed="0.000344"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.903577" level="INFO">${unique_email} = test_password_20251001_201841@teste.com</msg>
+<var>${unique_email}</var>
+<arg>${prefix}_${timestamp}@teste.com</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.903293" elapsed="0.000328"/>
+</kw>
+<return>
+<value>${unique_email}</value>
+<status status="PASS" start="2025-10-01T20:18:41.903702" elapsed="0.000059"/>
+</return>
+<msg time="2025-10-01T20:18:41.903959" level="INFO">${email} = test_password_20251001_201841@teste.com</msg>
+<var>${email}</var>
+<arg>test_password</arg>
+<doc>Gera um email único baseado no timestamp</doc>
+<status status="PASS" start="2025-10-01T20:18:41.902325" elapsed="0.001676"/>
+</kw>
+<kw name="Cadastrar Usuario Regular" owner="common_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:41.905479" level="INFO">${payload} = {'nome': 'Usuario Teste', 'email': 'test_password_20251001_201841@teste.com', 'password': 'senha_correta', 'administrador': 'false'}</msg>
+<var>${payload}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=false</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.905011" elapsed="0.001438"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:42.130409" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '132', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Usuario Teste", "email": "test_password_20251001_201841@teste.com", "password": "senha_correta", "administrador": "false"}' 
+ </msg>
+<msg time="2025-10-01T20:18:42.130891" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '3a046f976ef68c58c3d936126d756ef5', 'date': 'Thu, 02 Oct 2025 00:18:41 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "1qNefY6NwicXEtpY"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:42.131212" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:42.133230" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:41.906670" elapsed="0.226743"/>
+</kw>
+<if>
+<branch type="IF" condition="${response.status_code} == 201">
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-01T20:18:42.139203" level="INFO">${user_id} = 1qNefY6NwicXEtpY</msg>
+<var>${user_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.136498" elapsed="0.002852"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.140490" level="INFO">Regular user created with ID: 1qNefY6NwicXEtpY</msg>
+<arg>Regular user created with ID: ${user_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.139881" elapsed="0.000833"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="PASS" start="2025-10-01T20:18:42.140952" elapsed="0.000150"/>
+</return>
+<status status="PASS" start="2025-10-01T20:18:42.133894" elapsed="0.007386"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 400">
+<kw name="Log" owner="BuiltIn">
+<arg>User already exists or validation error</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.141865" elapsed="0.000098"/>
+</kw>
+<return>
+<value>${EMPTY}</value>
+<status status="NOT RUN" start="2025-10-01T20:18:42.142169" elapsed="0.000068"/>
+</return>
+<status status="NOT RUN" start="2025-10-01T20:18:42.141414" elapsed="0.000953"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Failed to create regular user: ${response.status_code}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.142871" elapsed="0.000091"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:42.142474" elapsed="0.000647"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.133782" elapsed="0.009455"/>
+</if>
+<arg>${email}</arg>
+<arg>senha_correta</arg>
+<doc>Cadastra um novo usuário regular</doc>
+<status status="PASS" start="2025-10-01T20:18:41.904531" elapsed="0.239189"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:42.454305" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '90', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"test_password_20251001_201841@teste.com\\", \\"password\\": \\"senha_errada\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:42.454688" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'ac5dc5fe74d60199c3d936126d7568e9', 'date': 'Thu, 02 Oct 2025 00:18:42 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:42.455133" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:42.457550" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "${email}", "password": "senha_errada"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.145373" elapsed="0.312417"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.464976" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-10-01T20:18:42.465538" level="FAIL">400.0 != 401.0</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="FAIL" start="2025-10-01T20:18:42.461240" elapsed="0.004618">400.0 != 401.0</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.466472" elapsed="0.000132"/>
+</kw>
+<arg>${response}</arg>
+<arg>401</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="FAIL" start="2025-10-01T20:18:42.459381" elapsed="0.007641">400.0 != 401.0</status>
+</kw>
+<kw name="Validar Response Message" owner="common_keywords">
+<arg>${response}</arg>
+<arg>${ERROR_MESSAGES['login']['invalid_credentials']}</arg>
+<doc>Valida a mensagem na resposta</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.468495" elapsed="0.000132"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ CT-003 PASSED: Invalid password correctly rejected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.469639" elapsed="0.000165"/>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Log Response Details" owner="common_keywords">
+<kw name="Get Variable Value" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.482501" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>${response}</arg>
+<arg>${None}</arg>
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.474410" elapsed="0.010274"/>
+</kw>
+<if>
+<branch type="IF" condition="${response} != ${None}">
+<kw name="Log" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.486771" elapsed="0.000147"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.487368" elapsed="0.000125"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Body: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.487879" elapsed="0.000092"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:42.485358" elapsed="0.002809"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.485248" elapsed="0.003041"/>
+</if>
+<doc>Log detalhado da resposta para debug</doc>
+<status status="PASS" start="2025-10-01T20:18:42.473361" elapsed="0.015180"/>
+</kw>
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.472491" elapsed="0.016250"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.489579" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.489156" elapsed="0.000621"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:42.471380" elapsed="0.018638"/>
+</kw>
+<doc>Valida que senha inválida retorna erro 401</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>boundary</tag>
+<tag>login</tag>
+<tag>negative</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2025-10-01T20:18:41.897984" elapsed="0.592896">400.0 != 401.0</status>
+</test>
+<test id="s1-t4" name="CT-004: Login com Campos Obrigatórios Vazios" line="75">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:42.500535" level="INFO">${timestamp} = 20251001_201842</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.499566" elapsed="0.001121"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.506401" level="INFO">${TEST_TIMESTAMP} = 20251001_201842</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.501221" elapsed="0.005595"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.508602" level="INFO">Test started at 20251001_201842</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.507655" elapsed="0.001307"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:42.498412" elapsed="0.011038"/>
+</kw>
+<kw name="Testar Login Com Campos Vazios">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.516248" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.515554" elapsed="0.000833"/>
+</kw>
+<if>
+<branch type="IF" condition="'${email_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>email=${email_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.519330" elapsed="0.000201"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:42.516741" elapsed="0.003097"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.516658" elapsed="0.003648"/>
+</if>
+<if>
+<branch type="IF" condition="'${password_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>password=${password_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.524198" elapsed="0.000974"/>
+</kw>
+<status status="PASS" start="2025-10-01T20:18:42.520888" elapsed="0.004552"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.520744" elapsed="0.004859"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:42.746543" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '24', 'Content-Type': 'application/json'} 
+ body=b'{"password": "senha123"}' 
+ </msg>
+<msg time="2025-10-01T20:18:42.746927" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'af48c11f895f8eb9c3d936126d756c34', 'date': 'Thu, 02 Oct 2025 00:18:42 GMT', 'server': 'Google Frontend', 'Content-Length': '40'} 
+ body={
+    "email": "email é obrigatório"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:42.747242" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:42.749568" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.526176" elapsed="0.223702"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.755330" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.752857" elapsed="0.002805"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.758571" level="INFO">Status code 400 matches expected 400</msg>
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.756208" elapsed="0.002609"/>
+</kw>
+<arg>${response}</arg>
+<arg>400</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="PASS" start="2025-10-01T20:18:42.751257" elapsed="0.007826"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.762774" level="INFO">${json_response} = {'email': 'email é obrigatório'}</msg>
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.759532" elapsed="0.003508"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.763911" elapsed="0.003441"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-01T20:18:42.769091" level="INFO">${error_message} = email é obrigatório</msg>
+<var>${error_message}</var>
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.768060" elapsed="0.001190"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${error_message}</arg>
+<arg>é obrigatório</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.769880" elapsed="0.000703"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.771741" level="INFO">✅ Empty field email correctly validated</msg>
+<arg>✅ Empty field ${expected_field_error} correctly validated</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.771097" elapsed="0.000879"/>
+</kw>
+<arg>${EMPTY}</arg>
+<arg>senha123</arg>
+<arg>email</arg>
+<status status="PASS" start="2025-10-01T20:18:42.512219" elapsed="0.260043"/>
+</kw>
+<kw name="Testar Login Com Campos Vazios">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:42.780811" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.780057" elapsed="0.000912"/>
+</kw>
+<if>
+<branch type="IF" condition="'${email_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>email=${email_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.783985" elapsed="0.000785"/>
+</kw>
+<status status="PASS" start="2025-10-01T20:18:42.781383" elapsed="0.003581"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.781283" elapsed="0.003806"/>
+</if>
+<if>
+<branch type="IF" condition="'${password_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>password=${password_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:42.787552" elapsed="0.000182"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:42.785343" elapsed="0.002681"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:42.785274" elapsed="0.002937"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:43.074310" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '27', 'Content-Type': 'application/json'} 
+ body=b'{"email": "email@test.com"}' 
+ </msg>
+<msg time="2025-10-01T20:18:43.074727" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '3baa10400ffa5f39c3d936126d7563bf', 'date': 'Thu, 02 Oct 2025 00:18:42 GMT', 'server': 'Google Frontend', 'Content-Length': '46'} 
+ body={
+    "password": "password é obrigatório"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:43.075125" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:43.077085" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:42.788762" elapsed="0.288580"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.082514" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.080037" elapsed="0.002808"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.085689" level="INFO">Status code 400 matches expected 400</msg>
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.083398" elapsed="0.002530"/>
+</kw>
+<arg>${response}</arg>
+<arg>400</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="PASS" start="2025-10-01T20:18:43.078342" elapsed="0.007882"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.089306" level="INFO">${json_response} = {'password': 'password é obrigatório'}</msg>
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.086720" elapsed="0.002742"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.089960" elapsed="0.000807"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-01T20:18:43.092150" level="INFO">${error_message} = password é obrigatório</msg>
+<var>${error_message}</var>
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.091276" elapsed="0.001015"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${error_message}</arg>
+<arg>é obrigatório</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.092782" elapsed="0.000684"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.094925" level="INFO">✅ Empty field password correctly validated</msg>
+<arg>✅ Empty field ${expected_field_error} correctly validated</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.094152" elapsed="0.001170"/>
+</kw>
+<arg>email@test.com</arg>
+<arg>${EMPTY}</arg>
+<arg>password</arg>
+<status status="PASS" start="2025-10-01T20:18:42.776843" elapsed="0.319047"/>
+</kw>
+<kw name="Testar Login Com Campos Vazios">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.103551" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.102819" elapsed="0.000879"/>
+</kw>
+<if>
+<branch type="IF" condition="'${email_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>email=${email_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.106401" elapsed="0.000101"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:43.104072" elapsed="0.005021"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:43.103977" elapsed="0.005395"/>
+</if>
+<if>
+<branch type="IF" condition="'${password_value}' != '${EMPTY}'">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${payload}</arg>
+<arg>password=${password_value}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.114994" elapsed="0.000145"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:43.109802" elapsed="0.005571"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:43.109679" elapsed="0.006133"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:43.336889" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '2', 'Content-Type': 'application/json'} 
+ body=b'{}' 
+ </msg>
+<msg time="2025-10-01T20:18:43.337303" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'c51a2eda230bd893c3d936126d756ecc', 'date': 'Thu, 02 Oct 2025 00:18:43 GMT', 'server': 'Google Frontend', 'Content-Length': '84'} 
+ body={
+    "email": "email é obrigatório",
+    "password": "password é obrigatório"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:43.337642" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:43.339740" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.116398" elapsed="0.223580"/>
+</kw>
+<kw name="Validar Response Status" owner="common_keywords">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.345054" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.342279" elapsed="0.003116"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.348733" level="INFO">Status code 400 matches expected 400</msg>
+<arg>Status code ${response.status_code} matches expected ${expected_status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.346047" elapsed="0.002934"/>
+</kw>
+<arg>${response}</arg>
+<arg>400</arg>
+<doc>Valida o status code da resposta</doc>
+<status status="PASS" start="2025-10-01T20:18:43.340815" elapsed="0.008489"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.352442" level="INFO">${json_response} = {'email': 'email é obrigatório', 'password': 'password é obrigatório'}</msg>
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.349819" elapsed="0.002786"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.353107" elapsed="0.000785"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-01T20:18:43.355267" level="INFO">${error_message} = email é obrigatório</msg>
+<var>${error_message}</var>
+<arg>${json_response}</arg>
+<arg>${expected_field_error}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.354399" elapsed="0.001004"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${error_message}</arg>
+<arg>é obrigatório</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.355901" elapsed="0.000624"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.357593" level="INFO">✅ Empty field email correctly validated</msg>
+<arg>✅ Empty field ${expected_field_error} correctly validated</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.357014" elapsed="0.000811"/>
+</kw>
+<arg>${EMPTY}</arg>
+<arg>${EMPTY}</arg>
+<arg>email</arg>
+<status status="PASS" start="2025-10-01T20:18:43.098157" elapsed="0.259907"/>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.361313" elapsed="0.000623"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.363210" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.362634" elapsed="0.000827"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:43.359562" elapsed="0.004197"/>
+</kw>
+<doc>Valida campos obrigatórios vazios retornam erro 400</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>boundary</tag>
+<tag>negative</tag>
+<tag>smoke</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-10-01T20:18:42.495155" elapsed="0.869513"/>
+</test>
+<test id="s1-t5" name="CT-005: Boundary Testing - Formatos de Email" line="85">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:43.373204" level="INFO">${timestamp} = 20251001_201843</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.372289" elapsed="0.001044"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.377421" level="INFO">${TEST_TIMESTAMP} = 20251001_201843</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.373831" elapsed="0.004266"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.379893" level="INFO">Test started at 20251001_201843</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.379145" elapsed="0.000976"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:43.371173" elapsed="0.009248"/>
+</kw>
+<kw name="Testar Login Com Email Boundary">
+<if>
+<branch type="IF" condition="${should_pass}">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Cadastrar Usuario Regular" owner="common_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.389407" level="INFO">${payload} = {'nome': 'Usuario Teste', 'email': 'a@b.c', 'password': 'senha123', 'administrador': 'false'}</msg>
+<var>${payload}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=false</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.387908" elapsed="0.003752"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:43.684498" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '93', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Usuario Teste", "email": "a@b.c", "password": "senha123", "administrador": "false"}' 
+ </msg>
+<msg time="2025-10-01T20:18:43.684868" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'a169aba3a9423e3eeb8a72ec1f7554bc', 'date': 'Thu, 02 Oct 2025 00:18:43 GMT', 'server': 'Google Frontend', 'Content-Length': '50'} 
+ body={
+    "email": "email deve ser um email válido"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:43.685176" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:43.687190" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.392422" elapsed="0.294956"/>
+</kw>
+<if>
+<branch type="IF" condition="${response.status_code} == 201">
+<kw name="Get From Dictionary" owner="Collections">
+<var>${user_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.690434" elapsed="0.000120"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Regular user created with ID: ${user_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.691053" elapsed="0.000103"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="NOT RUN" start="2025-10-01T20:18:43.691375" elapsed="0.000085"/>
+</return>
+<status status="NOT RUN" start="2025-10-01T20:18:43.687866" elapsed="0.003735"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 400">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:43.695408" level="INFO">User already exists or validation error</msg>
+<arg>User already exists or validation error</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.694560" elapsed="0.001260"/>
+</kw>
+<return>
+<value>${EMPTY}</value>
+<status status="PASS" start="2025-10-01T20:18:43.696229" elapsed="0.000269"/>
+</return>
+<status status="PASS" start="2025-10-01T20:18:43.691719" elapsed="0.005094"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Failed to create regular user: ${response.status_code}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.697881" elapsed="0.000125"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:43.697055" elapsed="0.001144"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:43.687750" elapsed="0.010578"/>
+</if>
+<arg>${email_value}</arg>
+<arg>senha123</arg>
+<doc>Cadastra um novo usuário regular</doc>
+<status status="PASS" start="2025-10-01T20:18:43.386523" elapsed="0.313931"/>
+</kw>
+<arg>Cadastrar Usuario Regular</arg>
+<arg>${email_value}</arg>
+<arg>senha123</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.385479" elapsed="0.315297"/>
+</kw>
+<status status="PASS" start="2025-10-01T20:18:43.384756" elapsed="0.316198"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:43.384662" elapsed="0.316426"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:43.991394" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"a@b.c\\", \\"password\\": \\"senha123\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:43.991699" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '6de16168f851bb0beb8a72ec1f7558fe', 'date': 'Thu, 02 Oct 2025 00:18:43 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:43.991959" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:43.994621" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "${email_value}", "password": "senha123"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:43.701596" elapsed="0.293225"/>
+</kw>
+<if>
+<branch type="IF" condition="${should_pass}">
+<if>
+<branch type="IF" condition="${response.status_code} == 200">
+<kw name="Validar Response Contem Campo" owner="common_keywords">
+<arg>${response}</arg>
+<arg>authorization</arg>
+<doc>Valida que a resposta contém um campo específico</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.998931" elapsed="0.000129"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Login successful as expected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:43.999603" elapsed="0.000107"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:43.996219" elapsed="0.003660"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 401">
+<kw name="Log" owner="BuiltIn">
+<arg>⚠️ ${description}: User might not exist, but format is valid</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.002171" elapsed="0.000100"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:43.999998" elapsed="0.002519"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.003733" level="FAIL">Unexpected status code for valid email format</msg>
+<arg>Unexpected status code for valid email format</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-10-01T20:18:44.003000" elapsed="0.001029">Unexpected status code for valid email format</status>
+</kw>
+<status status="FAIL" start="2025-10-01T20:18:44.002634" elapsed="0.001679">Unexpected status code for valid email format</status>
+</branch>
+<status status="FAIL" start="2025-10-01T20:18:43.996144" elapsed="0.010254">Unexpected status code for valid email format</status>
+</if>
+<status status="FAIL" start="2025-10-01T20:18:43.995487" elapsed="0.011282">Unexpected status code for valid email format</status>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.007405" elapsed="0.000117"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Invalid email correctly rejected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.008022" elapsed="0.000096"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.006923" elapsed="0.001348"/>
+</branch>
+<status status="FAIL" start="2025-10-01T20:18:43.995286" elapsed="0.013094">Unexpected status code for valid email format</status>
+</if>
+<arg>${BOUNDARY_VALUES['email']['min_valid']}</arg>
+<arg>True</arg>
+<arg>Email mínimo válido</arg>
+<status status="FAIL" start="2025-10-01T20:18:43.382174" elapsed="0.626636">Unexpected status code for valid email format</status>
+</kw>
+<kw name="Testar Login Com Email Boundary">
+<if>
+<branch type="IF" condition="${should_pass}">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<arg>Cadastrar Usuario Regular</arg>
+<arg>${email_value}</arg>
+<arg>senha123</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.015625" elapsed="0.000115"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.014786" elapsed="0.001181"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:44.014633" elapsed="0.001471"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:44.235917" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '65', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"emailsemArroba.com\\", \\"password\\": \\"senha123\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:44.236214" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'd6f451f42ff60968eb8a72ec1f755e7e', 'date': 'Thu, 02 Oct 2025 00:18:44 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:44.236469" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:44.238020" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "${email_value}", "password": "senha123"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.016547" elapsed="0.221661"/>
+</kw>
+<if>
+<branch type="IF" condition="${should_pass}">
+<if>
+<branch type="IF" condition="${response.status_code} == 200">
+<kw name="Validar Response Contem Campo" owner="common_keywords">
+<arg>${response}</arg>
+<arg>authorization</arg>
+<doc>Valida que a resposta contém um campo específico</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.239950" elapsed="0.000111"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Login successful as expected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.240540" elapsed="0.000091"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.239244" elapsed="0.001536"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 401">
+<kw name="Log" owner="BuiltIn">
+<arg>⚠️ ${description}: User might not exist, but format is valid</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.241258" elapsed="0.000083"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.240893" elapsed="0.000589"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Unexpected status code for valid email format</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.241907" elapsed="0.000078"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.241580" elapsed="0.000544"/>
+</branch>
+<status status="NOT RUN" start="2025-10-01T20:18:44.239175" elapsed="0.003037"/>
+</if>
+<status status="NOT RUN" start="2025-10-01T20:18:44.238641" elapsed="0.003674"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.245839" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-10-01T20:18:44.246373" level="FAIL">400.0 != 401.0</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="FAIL" start="2025-10-01T20:18:44.242774" elapsed="0.003907">400.0 != 401.0</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Invalid email correctly rejected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.247297" elapsed="0.000114"/>
+</kw>
+<status status="FAIL" start="2025-10-01T20:18:44.242402" elapsed="0.005258">400.0 != 401.0</status>
+</branch>
+<status status="FAIL" start="2025-10-01T20:18:44.238546" elapsed="0.009252">400.0 != 401.0</status>
+</if>
+<arg>${BOUNDARY_VALUES['email']['invalid_no_at']}</arg>
+<arg>False</arg>
+<arg>Email sem @</arg>
+<status status="FAIL" start="2025-10-01T20:18:44.011023" elapsed="0.237181">400.0 != 401.0</status>
+</kw>
+<kw name="Testar Login Com Email Boundary">
+<msg time="2025-10-01T20:18:44.251932" level="FAIL">Keyword 'Testar Login Com Email Boundary' expected 3 arguments, got 1.</msg>
+<arg>${BOUNDARY_VALUES['email']['invalid_no_domain']} False Email sem domínio</arg>
+<status status="FAIL" start="2025-10-01T20:18:44.249965" elapsed="0.002156">Keyword 'Testar Login Com Email Boundary' expected 3 arguments, got 1.</status>
+</kw>
+<kw name="Testar Login Com Email Boundary">
+<if>
+<branch type="IF" condition="${should_pass}">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Cadastrar Usuario Regular" owner="common_keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.259202" level="INFO">${payload} = {'nome': 'Usuario Teste', 'email': 'test+tag@domain-test.com', 'password': 'senha123', 'administrador': 'false'}</msg>
+<var>${payload}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=false</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.257790" elapsed="0.001757"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:44.604099" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '112', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Usuario Teste", "email": "test+tag@domain-test.com", "password": "senha123", "administrador": "false"}' 
+ </msg>
+<msg time="2025-10-01T20:18:44.606607" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '93e7509c0e62b27feb8a72ec1f755719', 'date': 'Thu, 02 Oct 2025 00:18:44 GMT', 'server': 'Google Frontend', 'Content-Length': '53'} 
+ body={
+    "message": "Este email já está sendo usado"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:44.606971" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:44.611494" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.260444" elapsed="0.351349"/>
+</kw>
+<if>
+<branch type="IF" condition="${response.status_code} == 201">
+<kw name="Get From Dictionary" owner="Collections">
+<var>${user_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.614731" elapsed="0.000107"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Regular user created with ID: ${user_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.615305" elapsed="0.000091"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="NOT RUN" start="2025-10-01T20:18:44.615593" elapsed="0.000080"/>
+</return>
+<status status="NOT RUN" start="2025-10-01T20:18:44.612335" elapsed="0.003464"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 400">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.618541" level="INFO">User already exists or validation error</msg>
+<arg>User already exists or validation error</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.618077" elapsed="0.000679"/>
+</kw>
+<return>
+<value>${EMPTY}</value>
+<status status="PASS" start="2025-10-01T20:18:44.618970" elapsed="0.000128"/>
+</return>
+<status status="PASS" start="2025-10-01T20:18:44.615938" elapsed="0.003314"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Failed to create regular user: ${response.status_code}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.619746" elapsed="0.000087"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.619366" elapsed="0.000616"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:44.612227" elapsed="0.007857"/>
+</if>
+<arg>${email_value}</arg>
+<arg>senha123</arg>
+<doc>Cadastra um novo usuário regular</doc>
+<status status="PASS" start="2025-10-01T20:18:44.256537" elapsed="0.365350"/>
+</kw>
+<arg>Cadastrar Usuario Regular</arg>
+<arg>${email_value}</arg>
+<arg>senha123</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.255519" elapsed="0.366643"/>
+</kw>
+<status status="PASS" start="2025-10-01T20:18:44.254820" elapsed="0.367504"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:44.254740" elapsed="0.367689"/>
+</if>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:44.930751" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '71', 'Content-Type': 'application/json'} 
+ body=b'"{\\"email\\": \\"test+tag@domain-test.com\\", \\"password\\": \\"senha123\\"}"' 
+ </msg>
+<msg time="2025-10-01T20:18:44.931195" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '68ad53d4de4766c4eb8a72ec1f755acb', 'date': 'Thu, 02 Oct 2025 00:18:44 GMT', 'server': 'Google Frontend', 'Content-Length': '145'} 
+ body={
+    "message": "Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225"
+} 
+ </msg>
+<msg time="2025-10-01T20:18:44.931503" level="INFO">C:\Users\Admin\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-10-01T20:18:44.933522" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/login</arg>
+<arg>json={"email": "${email_value}", "password": "senha123"}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.622826" elapsed="0.310956"/>
+</kw>
+<if>
+<branch type="IF" condition="${should_pass}">
+<if>
+<branch type="IF" condition="${response.status_code} == 200">
+<kw name="Validar Response Contem Campo" owner="common_keywords">
+<arg>${response}</arg>
+<arg>authorization</arg>
+<doc>Valida que a resposta contém um campo específico</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.937788" elapsed="0.000143"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Login successful as expected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.938466" elapsed="0.000104"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.935127" elapsed="0.003616"/>
+</branch>
+<branch type="ELSE IF" condition="${response.status_code} == 401">
+<kw name="Log" owner="BuiltIn">
+<arg>⚠️ ${description}: User might not exist, but format is valid</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.941216" elapsed="0.000112"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.938869" elapsed="0.002650"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.942994" level="FAIL">Unexpected status code for valid email format</msg>
+<arg>Unexpected status code for valid email format</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-10-01T20:18:44.942056" elapsed="0.001435">Unexpected status code for valid email format</status>
+</kw>
+<status status="FAIL" start="2025-10-01T20:18:44.941641" elapsed="0.002469">Unexpected status code for valid email format</status>
+</branch>
+<status status="FAIL" start="2025-10-01T20:18:44.935048" elapsed="0.009349">Unexpected status code for valid email format</status>
+</if>
+<status status="FAIL" start="2025-10-01T20:18:44.934420" elapsed="0.010419">Unexpected status code for valid email format</status>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.945666" elapsed="0.000117"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ ${description}: Invalid email correctly rejected</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.946350" elapsed="0.000107"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.945066" elapsed="0.003816"/>
+</branch>
+<status status="FAIL" start="2025-10-01T20:18:44.934311" elapsed="0.014740">Unexpected status code for valid email format</status>
+</if>
+<arg>test+tag@domain-test.com</arg>
+<arg>True</arg>
+<arg>Email com caracteres especiais</arg>
+<status status="FAIL" start="2025-10-01T20:18:44.253785" elapsed="0.695819">Unexpected status code for valid email format</status>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Log Response Details" owner="common_keywords">
+<kw name="Get Variable Value" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.962966" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>${response}</arg>
+<arg>${None}</arg>
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.955258" elapsed="0.007903"/>
+</kw>
+<if>
+<branch type="IF" condition="${response} != ${None}">
+<kw name="Log" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.964908" elapsed="0.000161"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.965571" elapsed="0.000100"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Body: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:44.966124" elapsed="0.000098"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:44.963638" elapsed="0.002751"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:44.963531" elapsed="0.002982"/>
+</if>
+<doc>Log detalhado da resposta para debug</doc>
+<status status="PASS" start="2025-10-01T20:18:44.954073" elapsed="0.012714"/>
+</kw>
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.953073" elapsed="0.013940"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.967912" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.967443" elapsed="0.000693"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:44.951808" elapsed="0.016600"/>
+</kw>
+<doc>Testa diferentes formatos de email nos limites</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>boundary</tag>
+<tag>email</tag>
+<tag>smoke</tag>
+<tag>validation</tag>
+<status status="FAIL" start="2025-10-01T20:18:43.368771" elapsed="1.600490">Several failures occurred:
+
+1) Unexpected status code for valid email format
+
+2) 400.0 != 401.0
+
+3) Keyword 'Testar Login Com Email Boundary' expected 3 arguments, got 1.
+
+4) Unexpected status code for valid email format</status>
+</test>
+<test id="s1-t6" name="CT-006: Validação de Expiração de Token" line="96">
+<kw name="Setup Test Case" owner="common_keywords" type="SETUP">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-10-01T20:18:44.981955" level="INFO">${timestamp} = 20251001_201844</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d_%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.980922" elapsed="0.001199"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.986535" level="INFO">${TEST_TIMESTAMP} = 20251001_201844</msg>
+<arg>${TEST_TIMESTAMP}</arg>
+<arg>${timestamp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.982723" elapsed="0.004188"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.988181" level="INFO">Test started at 20251001_201844</msg>
+<arg>Test started at ${timestamp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.987530" elapsed="0.000885"/>
+</kw>
+<doc>Configuração para cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:44.979551" elapsed="0.009219"/>
+</kw>
+<kw name="Fazer Login Admin" owner="common_keywords">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.993331" level="INFO">${admin_email} = admin@teste.com</msg>
+<var>${admin_email}</var>
+<arg>admin@teste.com</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.991990" elapsed="0.001524"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-01T20:18:44.995586" level="INFO">${admin_password} = 123456</msg>
+<var>${admin_password}</var>
+<arg>123456</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-01T20:18:44.994433" elapsed="0.001408"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<msg time="2025-10-01T20:18:45.000081" level="FAIL">Variable '${token}' not found. Did you mean:
+    ${ADMIN_TOKEN}</msg>
+<var>${login_result}</var>
+<arg>${token}=</arg>
+<arg>Fazer Login</arg>
+<arg>${admin_email}</arg>
+<arg>${admin_password}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="FAIL" start="2025-10-01T20:18:44.996467" elapsed="0.003835">Variable '${token}' not found. Did you mean:
+    ${ADMIN_TOKEN}</status>
+</kw>
+<if>
+<branch type="IF" condition="not ${login_result}">
+<kw name="Log" owner="BuiltIn">
+<arg>Admin user not found, creating...</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.001319" elapsed="0.000105"/>
+</kw>
+<kw name="Cadastrar Usuario Admin" owner="common_keywords">
+<arg>${admin_email}</arg>
+<arg>${admin_password}</arg>
+<doc>Cadastra um novo usuário administrador</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.002657" elapsed="0.000146"/>
+</kw>
+<kw name="Fazer Login" owner="common_keywords">
+<var>${token}</var>
+<arg>${admin_email}</arg>
+<arg>${admin_password}</arg>
+<doc>Realiza login e retorna o token de autorização</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.003722" elapsed="0.000132"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:45.000819" elapsed="0.003210"/>
+</branch>
+<status status="NOT RUN" start="2025-10-01T20:18:45.000705" elapsed="0.003437"/>
+</if>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${ADMIN_TOKEN}</arg>
+<arg>${token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.004556" elapsed="0.000089"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${ADMIN_USER}</arg>
+<arg>${admin_email}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.005054" elapsed="0.000084"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Admin logged in successfully</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.005521" elapsed="0.000085"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="NOT RUN" start="2025-10-01T20:18:45.005775" elapsed="0.000079"/>
+</return>
+<var>${token}</var>
+<doc>Faz login com usuário administrador padrão</doc>
+<status status="FAIL" start="2025-10-01T20:18:44.990730" elapsed="0.015496">Variable '${token}' not found. Did you mean:
+    ${ADMIN_TOKEN}</status>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${headers}</var>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.007365" elapsed="0.000112"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response_valid}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.011273" elapsed="0.000204"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response_valid.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.013050" elapsed="0.000181"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${invalid_token}</var>
+<arg>Bearer token_invalido_simulado</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.014341" elapsed="0.000110"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${headers_invalid}</var>
+<arg>Authorization=${invalid_token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.015455" elapsed="0.000111"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response_invalid}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<arg>headers=${headers_invalid}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.016543" elapsed="0.000107"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response_invalid.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.017636" elapsed="0.000108"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ CT-006 PASSED: Token validation working correctly</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.020566" elapsed="0.000150"/>
+</kw>
+<kw name="Teardown Test Case" owner="common_keywords" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Log Response Details" owner="common_keywords">
+<kw name="Get Variable Value" owner="BuiltIn">
+<msg time="2025-10-01T20:18:45.033058" level="INFO">${response} = None</msg>
+<var>${response}</var>
+<arg>${response}</arg>
+<arg>${None}</arg>
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<status status="PASS" start="2025-10-01T20:18:45.026419" elapsed="0.006796"/>
+</kw>
+<if>
+<branch type="IF" condition="${response} != ${None}">
+<kw name="Log" owner="BuiltIn">
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.034513" elapsed="0.000103"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Headers: ${response.headers}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.035029" elapsed="0.000123"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response Body: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-01T20:18:45.035572" elapsed="0.000125"/>
+</kw>
+<status status="NOT RUN" start="2025-10-01T20:18:45.033615" elapsed="0.002557"/>
+</branch>
+<status status="PASS" start="2025-10-01T20:18:45.033524" elapsed="0.003032"/>
+</if>
+<doc>Log detalhado da resposta para debug</doc>
+<status status="PASS" start="2025-10-01T20:18:45.025090" elapsed="0.011861"/>
+</kw>
+<arg>Log Response Details</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-10-01T20:18:45.024135" elapsed="0.013281"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:45.038533" level="INFO">Test completed</msg>
+<arg>Test completed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:45.038037" elapsed="0.000763"/>
+</kw>
+<doc>Limpeza após cada caso de teste</doc>
+<status status="PASS" start="2025-10-01T20:18:45.022836" elapsed="0.016234"/>
+</kw>
+<doc>Valida comportamento com token expirado (simulado)</doc>
+<tag>api</tag>
+<tag>auth</tag>
+<tag>security</tag>
+<tag>smoke</tag>
+<tag>timeout</tag>
+<tag>token</tag>
+<status status="FAIL" start="2025-10-01T20:18:44.976458" elapsed="0.063411">Variable '${token}' not found. Did you mean:
+    ${ADMIN_TOKEN}</status>
+</test>
+<kw name="Teardown Test Suite" owner="common_keywords" type="TEARDOWN">
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2025-10-01T20:18:45.047562" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-10-01T20:18:45.047050" elapsed="0.000864"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-01T20:18:45.049006" level="INFO">All sessions deleted</msg>
+<arg>All sessions deleted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-01T20:18:45.048507" elapsed="0.000849"/>
+</kw>
+<doc>Limpeza após a suite de testes</doc>
+<status status="PASS" start="2025-10-01T20:18:45.046238" elapsed="0.003453"/>
+</kw>
+<doc>Testes de Autenticação da API ServeRest
+Valida funcionalidades de login, logout e token management</doc>
+<status status="FAIL" start="2025-10-01T20:18:39.563429" elapsed="5.486419"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="5" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="5" skip="0">api</stat>
+<stat pass="1" fail="5" skip="0">auth</stat>
+<stat pass="1" fail="3" skip="0">boundary</stat>
+<stat pass="0" fail="1" skip="0">critical</stat>
+<stat pass="0" fail="1" skip="0">email</stat>
+<stat pass="0" fail="3" skip="0">login</stat>
+<stat pass="1" fail="2" skip="0">negative</stat>
+<stat pass="0" fail="1" skip="0">positive</stat>
+<stat pass="0" fail="1" skip="0">security</stat>
+<stat pass="1" fail="5" skip="0">smoke</stat>
+<stat pass="0" fail="1" skip="0">timeout</stat>
+<stat pass="0" fail="1" skip="0">token</stat>
+<stat pass="1" fail="1" skip="0">validation</stat>
+</tag>
+<suite>
+<stat name="Test Auth" id="s1" pass="1" fail="5" skip="0">Test Auth</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,5 +1,9 @@
 # Integração com QALity e Jira - Guia de Configuração
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025  
+**Versão**: 1.0
+
 ## 📋 Visão Geral
 
 Este guia detalha como integrar os testes do ServeRest com QALity para execução e rastreamento no Jira, conforme solicitado no challenge.

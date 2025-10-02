@@ -1,4 +1,4 @@
-# Template de Caso de Teste Manual
+# Template d| **Autor** | Caio Oliveira Silva Alencar | Caso de Teste Manual
 
 ## Informações Gerais
 
@@ -70,7 +70,7 @@
 | Campo | Valor |
 |-------|--------|
 | **Data Execução** | |
-| **Executado por** | |
+| **Executado por** | Caio Oliveira Silva Alencar |
 | **Ambiente** | |
 | **Versão API** | |
 | **Status** | ✅ Passou / ❌ Falhou / ⚠️ Bloqueado |

@@ -1,5 +1,9 @@
 # Regras de Negócio - ServeRest API
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025  
+**Versão**: 1.0
+
 ## 📋 Introdução
 
 Este documento detalha as regras de negócio identificadas na API ServeRest, organizadas por módulo. O foco está em regras que impactam diretamente os testes e validações necessárias.

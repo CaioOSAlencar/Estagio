@@ -1,5 +1,9 @@
 # Estratégia de Testes - ServeRest API
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025  
+**Versão**: 1.0
+
 ## 1. Visão Geral
 
 Esta estratégia de testes foi desenvolvida considerando os feedbacks dos instrutores, com foco especial em:

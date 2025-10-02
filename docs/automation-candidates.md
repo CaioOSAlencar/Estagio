@@ -1,5 +1,9 @@
 # Critérios de Seleção para Automação
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025  
+**Versão**: 1.0
+
 ## 📋 Visão Geral
 
 Este documento estabelece os critérios claros para determinar quais testes devem ser automatizados e quais devem permanecer manuais, baseado nas melhores práticas de QA e na análise do projeto ServeRest.

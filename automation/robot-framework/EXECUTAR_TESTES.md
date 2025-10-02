@@ -1,5 +1,8 @@
 # Execução dos Testes Automatizados - ServeRest
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025
+
 ## 📋 Pré-requisitos
 
 ### Ferramentas Necessárias

@@ -1,5 +1,9 @@
 # Challenge ServeRest - Testes API Avançados 🚀
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Repositório**: https://github.com/CaioOSAlencar/Estagio  
+**Data de Início**: Outubro 2025
+
 ## 📋 Visão Geral
 
 Este projeto é uma **evolução completa** dos testes da API ServeRest, desenvolvido como continuidade do challenge anterior. O foco está em aplicar **melhorias baseadas nos feedbacks dos instrutores**, implementar **testes de limite (boundary testing)** abrangentes e criar uma **suite de automação robusta** com Robot Framework.

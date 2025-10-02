@@ -1,5 +1,8 @@
 # Challenge ServeRest - Testes Manuais e Automação
 
+**Autor**: Caio Oliveira Silva Alencar  
+**Data**: Outubro 2025
+
 ## 📋 Visão Geral do Projeto
 
 Este projeto é uma continuidade dos exercícios de teste da API ServeRest, focando em:
