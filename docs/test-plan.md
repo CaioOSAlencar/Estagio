@@ -6,7 +6,7 @@
 |-----------|-----------|
 | **Projeto** | Challenge ServeRest - Testes API |
 | **Versão** | 2.0 (Baseado nos feedbacks dos instrutores) |
-| **Responsável** | [Seu Nome] |
+| **Responsável** | Caio Oliveira Silva Alencar |
 | **Data** | Outubro 2025 |
 | **Ambiente** | https://serverest.dev |
 | **Ferramenta Manual** | Postman + Newman |
